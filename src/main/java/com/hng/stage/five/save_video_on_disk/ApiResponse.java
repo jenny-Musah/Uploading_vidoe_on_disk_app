@@ -1,6 +1,5 @@
 package com.hng.stage.five.save_video_on_disk;
 
-import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 

@@ -23,25 +23,25 @@ public class DiskVideoSaverController {
 
 
     @PostMapping("upload")
-    public ResponseEntity<ApiResponse> uploadVideoToDisk(@RequestParam("file")MultipartFile file){
+    public ResponseEntity<ApiResponse> uploadVideoToDisk(@RequestParam("file")MultipartFile file) throws IOException {
         return ResponseEntity.ok(diskVideoSaverService.uploadFile(file));
     }
 
-    @GetMapping("{videoId}")
-    public void renderVideo(@PathVariable String videoId, HttpServletResponse response){
-        InputStream videoStream = diskVideoSaverService.renderUploadedVideo(videoId);
-        response.setHeader(HttpHeaders.CONTENT_TYPE, "video/mp4"); // Set the appropriate content type
-        response.setHeader(HttpHeaders.CONTENT_DISPOSITION, "inline; filename=video.mp4"); // Set the file name
-try {
-    byte[] buffer = new byte[1024];
-    int bytesRead;
-    while ((bytesRead = videoStream.read(buffer)) != -1) {
-        response.getOutputStream().write(buffer, 0, bytesRead);
-    }
-}catch (IOException ioException){
-    throw new RuntimeException(ioException.getMessage());
-}
-    }
+//    @GetMapping("{videoId}")
+//    public void renderVideo(@PathVariable String videoId, HttpServletResponse response){
+//        InputStream videoStream = diskVideoSaverService.renderUploadedVideo(videoId);
+//        response.setHeader(HttpHeaders.CONTENT_TYPE, "video/mp4"); // Set the appropriate content type
+//        response.setHeader(HttpHeaders.CONTENT_DISPOSITION, "inline; filename=video.mp4"); // Set the file name
+//try {
+//    byte[] buffer = new byte[1024];
+//    int bytesRead;
+//    while ((bytesRead = videoStream.read(buffer)) != -1) {
+//        response.getOutputStream().write(buffer, 0, bytesRead);
+//    }
+//}catch (IOException ioException){
+//    throw new RuntimeException(ioException.getMessage());
+//}
+//    }
 
 
 }
